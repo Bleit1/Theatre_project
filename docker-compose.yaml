@@ -4,6 +4,7 @@ services:
   db:
     image: postgres:14.17
     container_name: postgres-theatre
+    restart: always
     env_file:
       - .env
     environment:
@@ -13,7 +14,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - .:/usr/src/app
+
     networks:
       - theatre-network
     healthcheck:
@@ -26,13 +28,13 @@ services:
   web:
     build: .
     container_name: theatre-backend
+    restart: always
     command: >
       sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     env_file:
       - .env
     ports:
-      - "8001:8000"
-
+      - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
@@ -43,8 +45,6 @@ services:
 
 volumes:
   postgres_data:
-    driver: local
 
 networks:
   theatre-network:
-    driver: bridge

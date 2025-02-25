@@ -20,7 +20,11 @@ class CustomUserManager(BaseUserManager):
 
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
+
 class User(AbstractUser):
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
     groups = models.ManyToManyField(
         Group,
         related_name='custom_user_set',

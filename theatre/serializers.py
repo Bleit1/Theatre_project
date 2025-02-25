@@ -32,8 +32,9 @@ class PerformanceSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-    performance = PerformanceSerializer(read_only=True)
+    performance = serializers.PrimaryKeyRelatedField(queryset=Performance.objects.all())
+    performance_detail = PerformanceSerializer(source='performance', read_only=True)
 
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ['id', 'performance', 'performance_detail', 'user', 'seats']
