@@ -1,4 +1,5 @@
 # Theatre Project
+![изображение](https://github.com/user-attachments/assets/f3cf71bb-a021-4d6b-a34d-27fff4c88b62)
 
 Theatre Project is a Django application for managing theatrical productions, including plays, performances, actors, genres, and reservations. It provides a REST API for integration with a frontend and uses Django’s admin panel for content management.
 
